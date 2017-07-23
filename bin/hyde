@@ -6,3 +6,4 @@ puts "You ran Hyde with these arguments: #{args}"
 # ##############
 # Your code here
 # ##############
+args[0], ""
