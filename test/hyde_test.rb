@@ -1,13 +1,14 @@
-require "minitest/autorun"
-require "minitest/pride"
+require_relative 'test_helper'
 require "./lib/hyde"
 
 class HydeTest < Minitest::Test
 
-  def test_it_exists
-    h = Hyde.new
+  def test_if_error_if_no_argv_1
+    h = Hyde.new(["new", ""])
+    retVal = h.evaluate
 
-    assert_instance_of Hyde, h 
-
+    assert_equal retVal, false
   end
+
+  
 end
