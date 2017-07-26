@@ -10,6 +10,6 @@ class HydeTest < Minitest::Test
   end
 
   def test_it_creates_directory_tree
-    
+
 
 end

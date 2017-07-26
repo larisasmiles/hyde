@@ -5,38 +5,46 @@ class Hyde
   attr_reader :user_cmd, :user_cmd2
 
   def initialize(argv)
+    #1
     @user_cmd = argv[0]
     @user_cmd2 = argv[1]
-
+    evaluate
   end
 
   def create_dir
-    return false if Dir.exist?(File.join(Dir.home, "#{user_cmd2}"))
-    Dir.mkdir("#{user_cmd2}")
-    puts "string"
+    #3
+    # binding.pry
+    if Dir.exist?(File.join(Dir.home, "#{user_cmd2}"))
+    puts "Directory Already Exists!"
+    else
+      directory_tree
+    end
   end
 
   def evaluate
+    #2
     if user_cmd == "new"
       create_dir
-      directory_tree
-      # file_tree
-    else
-      return
     end
   end
 
   def directory_tree
-
-    Dir.mkdir("#{user_cmd2 + "/_output"}")
-    # Dir.mkdir("#{user_cmd2}" + "/source")
-    # Dir.mkdir("#{user_cmd2}" + "/source/css")
-    # Dir.mkdir("#{user_cmd2}" + "/source/pages")
-    # Dir.mkdir("#{user_cmd2}" + "/source/posts")
+    FileUtils::mkdir_p user_cmd2 + "/_output"
+    FileUtils::mkdir_p user_cmd2 + "/source"
+    # FileUtils::mkdir_p user_cmd2 + "/source/index.markdown"
+    FileUtils::mkdir_p user_cmd2 + "/source/css"
+    FileUtils::mkdir_p user_cmd2 + "/source/pages"#/about.markdown"
+    FileUtils::mkdir_p user_cmd2 + "/source/posts"#+"#{todays_date}"+"#{blog_title}"+".markdown"
+    file_tree
   end
 
   def file_tree
-    touch user_cmd2 + "/source/index.markdown"
-    touch user_cmd2 + "/source/main.css"
+    todays_date = Date.today.strftime("%Y-%m-%d")
+    blog_title = "welcome-to-hyde"
+    #5
+    FileUtils.touch user_cmd2 + "/source/index.markdown"
+    FileUtils.touch user_cmd2 + "/source/css/main.css"
+    FileUtils.touch user_cmd2 + "/source/pages/about.markdown"
+    FileUtils.touch user_cmd2 + "/source/posts/"+"#{todays_date}-"+"#{blog_title}"+".markdown"
   end
 end
