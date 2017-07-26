@@ -9,7 +9,7 @@ puts "You ran Hyde with these arguments: #{args}"
 
 # Hyde.new(argvX
 h = Hyde.new(args)
-h.create_dir
+h.evaluate
 
 
  #do I use this to create the DIR? then use file i/o
