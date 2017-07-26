@@ -40,15 +40,15 @@ class Hyde
     FileUtils.touch user_cmd2 + "/source/css/main.css"
     FileUtils.touch user_cmd2 + "/source/pages/about.markdown"
     FileUtils.touch user_cmd2 + "/source/posts/"+"#{todays_date}-"+"#{blog_title}"+".markdown"
-    file_filter
+    # file_filter
   end
-
-  def file_filter
-    a = user_cmd2.split("/").last
-    Dir.foreach(a+"/source/") { |folder| copy_files folder unless folder == '.' || folder == '..'}
-  end
-
-  def copy_files(file_name)
-    FileUtils.cp_r(user_cmd2 + "/source" + "/" + file_name, user_cmd2 + '/_output/')
-  end
+  # 
+  # def file_filter
+  #   a = user_cmd2.split("/").last
+  #   Dir.foreach(a+"/source/") { |folder| copy_files folder unless folder == '.' || folder == '..'}
+  # end
+  #
+  # def copy_files(file_name)
+  #   FileUtils.cp_r(user_cmd2 + "/source" + "/" + file_name, user_cmd2 + '/_output/')
+  # end
 end
