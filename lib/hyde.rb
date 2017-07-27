@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'kramdown'
 require "pry"
+require_relative 'output'
 
 class Hyde
   attr_reader :user_cmd, :user_cmd2
@@ -21,6 +22,9 @@ class Hyde
   def evaluate
     if user_cmd == "new"
       create_dir
+    # else
+    # user_cmd == "build"
+      
     end
   end
 
@@ -40,9 +44,11 @@ class Hyde
     FileUtils.touch user_cmd2 + "/source/css/main.css"
     FileUtils.touch user_cmd2 + "/source/pages/about.markdown"
     FileUtils.touch user_cmd2 + "/source/posts/"+"#{todays_date}-"+"#{blog_title}"+".markdown"
-    # file_filter
+    o = Output.new(user_cmd2)
+    o.file_filter
+    # Output.new(user_cmd2).file_filter
   end
-  # 
+
   # def file_filter
   #   a = user_cmd2.split("/").last
   #   Dir.foreach(a+"/source/") { |folder| copy_files folder unless folder == '.' || folder == '..'}

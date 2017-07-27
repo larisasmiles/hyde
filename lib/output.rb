@@ -3,8 +3,10 @@ require 'kramdown'
 require 'pry'
 
 class Output
+  attr_reader :user_cmd2
 
-  def initialize(argv)
+  def initialize(path)
+    @user_cmd2 = path
 
 
   end
@@ -14,8 +16,9 @@ class Output
   #need to convert md to html
   def file_filter
     a = user_cmd2.split("/").last
-    Dir.foreach(a+"/source/") { |folder| copy_files folder unless folder == '.' || folder == '..'}
-    copy_files
+    Dir.foreach(a+"/source/") do |folder|
+       copy_files folder unless folder == '.' || folder == '..'
+     end
   end
 
   def copy_files(file_name)
