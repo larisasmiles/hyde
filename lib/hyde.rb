@@ -19,12 +19,16 @@ class Hyde
     end
   end
 
+  def convert_md_to_html
+    output = Output.new(user_cmd2)
+    output.file_filter
+  end
+
   def evaluate
     if user_cmd == "new"
       create_dir
-    # else
-    # user_cmd == "build"
-      
+    elsif user_cmd == "build"
+      convert_md_to_html
     end
   end
 
@@ -44,17 +48,7 @@ class Hyde
     FileUtils.touch user_cmd2 + "/source/css/main.css"
     FileUtils.touch user_cmd2 + "/source/pages/about.markdown"
     FileUtils.touch user_cmd2 + "/source/posts/"+"#{todays_date}-"+"#{blog_title}"+".markdown"
-    o = Output.new(user_cmd2)
-    o.file_filter
-    # Output.new(user_cmd2).file_filter
+    # o = Output.new(user_cmd2)
+    # o.file_filter
   end
-
-  # def file_filter
-  #   a = user_cmd2.split("/").last
-  #   Dir.foreach(a+"/source/") { |folder| copy_files folder unless folder == '.' || folder == '..'}
-  # end
-  #
-  # def copy_files(file_name)
-  #   FileUtils.cp_r(user_cmd2 + "/source" + "/" + file_name, user_cmd2 + '/_output/')
-  # end
 end
